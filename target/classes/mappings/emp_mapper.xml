@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yedam.emp.service.impl.EmpMapper">
+<!-- <mapper namespace="EmpDAO">	 -->	<!-- namespace : mapper를 구별하는 이름 -->
+
+
+
+
+<!-- 등록 -->
+<insert id="insertEmp" parameterType="emp">
+INSERT INTO EMPLOYEES (EMPLOYEE_ID, 
+						First_name, 
+						LAST_NAME,
+						EMAIL, 
+						phone_number, 
+						HIRE_DATE, 
+						JOB_ID,
+						department_id, 
+<if test="manager_id !=null">manager_id) </if>						
+VALUES (#{employee_id},
+		#{first_name},
+		#{last_name},
+		#{email},
+		#{phone_number},
+		#{hire_date},
+		#{job_id},
+		#{department_id},
+<if test="manager_id != null">#{manager_id})</if>		
+</insert>
+
+<!-- 수정 -->
+<update id="updateEmp" parameterType="emp">
+UPDATE employees			
+<set>		
+			<if test="email != null">email=#{email},</if>
+			<if test="phone_number != null">phone_number=#{phone_number},</if>
+			<if test="job_id != null">job_id = #{job_id},</if>
+</set>
+WHERE employee_id=#{employee_id}
+</update>
+
+
+<!-- 삭제 -->
+<delete id="deleteEmp">
+DELETE FROM employees
+WHERE employee_id=#{employee_id}
+
+</delete>
+
+<!-- 조회 -->
+<select id="getSearchEmp" parameterType="emp"
+							resultType="emp">
+	SELECT * 
+	FROM 
+	employees e INNER JOIN department d
+		ON e.department_id=d.department_id
+	INNER JOIN jobs j
+			ON e.job_id = j.job_id
+	<where>
+		<if test="department_id != null and department_id != ''">	<!-- ?department_id=로 조회시 해당 부서번호 직원만 검색됨 -->
+			DEPARTMENT_ID = #{department_id}
+		</if>
+		<if test="job_id != null and job_id != ''">
+			JOB_ID = #{job_id}
+		</if>								<!-- if문 한번에 조회: ?job_id=AD_VP&department_id=10 -->
+		<if test="first_name != null and first_name != ''">
+			And UPPER(first_name) LIKE '%' || upper(#{first_name}) || '%'
+		</if>
+	</where>
+</select>
+
+<!-- 단건조회 -->
+<select id="getEmp" resultType="emp">
+SELECT * FROM EMPLOYEES
+WHERE EMPLOYEE_ID=#{employee_id}
+</select>
+</mapper>
+
