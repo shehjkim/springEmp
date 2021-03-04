@@ -16,7 +16,7 @@ public class DeptDAO {
 
 	@Autowired JdbcTemplate jdbc;
 	
-	private String sql1="INSERT INTO departments (?,?,?,?)";
+	private String sql1="INSERT INTO departments VALUES(?,?,?,?)";
 	private String sql2="UPDATE department SET department_name=?,manager_id=?, location_id=? WHERE department_id=?";
 	private String sql3="DELETE FROM departments WHERE department_id=?";
 	private String sql4="SELECT * FROM departments WHERE department_id=?";

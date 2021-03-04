@@ -2,6 +2,7 @@ package com.yedam.emp.service;
 
 import java.util.List;
 
+import com.yedam.emp.DeptSearchVO;
 import com.yedam.emp.DeptVO;
 
 public interface DeptService {
@@ -16,4 +17,6 @@ public interface DeptService {
 	public DeptVO getDept(DeptVO vo);
 	//전체/검색조회
 	public List<DeptVO> getSearchDept(DeptVO vo);
+	//
+	public int getCount(DeptSearchVO vo);
 }

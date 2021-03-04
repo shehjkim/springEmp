@@ -6,7 +6,7 @@
 
 <!-- 등록 -->
 	<insert id="insertDept" parameterType="dept">
-		INSERT INTO departments
+		INSERT INTO departments VALUES
 		(#{department_id}, #{department_name}, #{manager_id}, #{location_id} )
 	</insert>
 <!-- 수정 -->
@@ -23,22 +23,42 @@
 	</delete>
 
 <!-- 조회 -->
-	<select id="getSearchDept" parameterType="dept"
-		resultType="dept">
-		select d.department_id, d.department_name, d.manager_id, e.last_name, l.location_id, l.city
+<select id="getSearchDept" parameterType="deptSearchVO"
+								resultType="dept">
+SELECT b.*
+FROM(SELECT rownum rn, a.*
+          FROM(
+          select d.department_id, d.department_name, d.manager_id, e.last_name, l.location_id, l.city
 		from departments d JOIN locations l
 		ON(d.location_id = l.location_id)
 		INNER JOIN employees e
 		ON e.employee_id = d.manager_id
 <where>
 		<if test="department_name != null and department_name != ''">
-			DEPARTMENT_NAME = #{department_name}
+			d.DEPARTMENT_NAME = #{department_name}
 		</if>
 		<if test="manager_id != null and manager_id != ''">
-			d.MANAGER_ID = #{manager_id}
+			e.MANAGER_ID = #{manager_id}
 		</if>
 </where>
-	</select>
+) a
+        ) b
+WHERE rn between #{start} and #{end}
+</select>
+	
+<!-- 레코드 건수 -->
+<select id ="getCount" resultType="int">
+	SELECT COUNT(*) FROM departments
+<where>
+<if test="department_name != null and department_name != ''">	
+			DEPARTMENT_NAME = #{department_NAME}
+		</if>
+<if test="manager_id != null and manager_id != ''">
+			MANAGER_ID = #{manager_id}
+			
+		</if>	
+</where>	
+</select>	
 
 <!-- 단건조회 -->
 	<select id="getDept" resultType="dept">

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yedam.emp.service.impl.JobMapper">
+
+<!-- 등록 -->
+<insert id="insertJob" parameterType="job">
+	INSERT INTO jobs 
+				VALUES (#{job_id},
+						#{job_title},
+						#{min_salary},
+						#{max_salary}
+						)
+</insert>
+<!-- 수정 -->
+<update id="updateJob">
+UPDATE jobs
+		 SET job_title=#{job_title}, 
+		 	min_salary=#{min_salary}, 
+		 	max_salary=#{max_salary} 
+WHERE job_id=#{job_id}
+</update>
+
+<!-- 삭제 -->
+<delete id="deleteJob">
+DELETE FROM jobs WHERE job_id=#{job_id}
+</delete>
+
+<!-- 전체조회 -->
+<select id="getJob" resultType="job">
+SELECT * FROM jobs
+</select>
+
+<!-- 단건조회 -->
+<select id="getSearchJob" parameterType="jobVO"
+					resultType="job">
+SELECT * FROM jobs WHERE job_id=#{job_id}
+</select>
+
+
+
+</mapper>

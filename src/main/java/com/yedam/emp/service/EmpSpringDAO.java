@@ -19,15 +19,12 @@ public class EmpSpringDAO {
 	
 	private String INSERT_EMP="INSERT INTO EMPLOYEES "
 							+ "EMPLOYEE_ID, "
-							+ "First_name, "
 							+ "LAST_NAME, "
 							+ "EMAIL, "
-							+ "phone_number, "
 							+ "HIRE_DATE, "
 							+ "JOB_ID, "
 							+ "department_id, "
-							+ "manager_id "
-							+ "VALUES (?,?,?,?,?,?,?,?,?)";
+							+ "VALUES (?,?,?,?,?,?)";
 	private String UPDATE_EMP="UPDATE employees SET EMAIL=?, phone_number=?, job_id=?,department_id=? WHERE EMPLOYEE_ID=?";
 	private String DELETE_EMP="DELETE FROM employees WHERE employee_id=?";
 	private String GET_EMP="SELECT employee_id, first_name, last_name, salary, hire_date, department_id, job_id, email FROM EMPLOYEES WHERE employee_id=?";
@@ -37,14 +34,12 @@ public class EmpSpringDAO {
 		public int insertEmp(EmpVO vo) {
 			int result = 0;
 			result = jdbc.update(INSERT_EMP, vo.getEmployee_id(),
-											vo.getFirst_name(), 
 											vo.getLast_name(),
 											vo.getEmail(), 
 											vo.getPhone_number(),
 											vo.getHire_date(), 
 											vo.getJob_id(),
-											vo.getDepartment_id(), 
-											vo.getManager_id());
+											vo.getDepartment_id());
 			
 			return result;
 		}

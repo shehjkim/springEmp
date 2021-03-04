@@ -10,6 +10,8 @@
 <div align="center">
 <a href="getSearchEmp">사원조회</a>
 <a href="getSearchDept">부서조회</a>
+<a href="getSearchJob">직무조회</a>
+<a href="insertOrder">배송</a>
 </div>
 </body>
 </html>
