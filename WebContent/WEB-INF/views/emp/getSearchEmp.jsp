@@ -40,28 +40,19 @@
 				<td>부서이름</td>
 				<td>직무</td>
 			</tr>
-			<c:forEach items="${list }" var="emp">
+			<c:forEach items="${list }" var="pro">
 				<tr>
-					<td>${emp.employee_id }</td>
-					<td><a href="getEmp?employee_id=${emp.employee_id}">${emp.last_name }</a></td>
-					<td>${emp.salary }</td>
-					<td>${emp.email }</td>
-					<td>${emp.job_id }</td>
-					<td>${emp.hire_date }</td>
-					<td>${emp.department_id }</td>
-					<td>${emp.department_name }</td>
-					<td>${emp.job_title }</td>
+					<td>${pro.product_id}</td>
+					<td>${pro.product_name}</td>
+					<td>${pro.product_price}</td>
+					<td>${pro.product_info}</td>
+					<td>${pro.product_date}</td>
+					<td>${pro.company}</td>
+					<td>${pro.manager_id}</td>
+					
 				</tr>
 			</c:forEach>
 		</table>
-		<my:paging paging="${paging}" jsFunc="goPage" />
-
-	</div>
-	<br>
-	<hr>
-	<br>
-	<div align="center">
-		<button type="button" onclick="location.href='insertEmp'">사원등록</button>
 	</div>
 </body>
 </html>

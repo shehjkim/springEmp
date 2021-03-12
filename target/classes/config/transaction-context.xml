@@ -14,7 +14,7 @@
 	</bean>
 
 	<!-- @Transactional 어노테이션 처리 -->
-	<!-- <tx:annotation-driven transaction-manager="txManager" /> -->
+	 <tx:annotation-driven transaction-manager="txManager" /> 
 
 	<!-- TransactionManager 적용범위 -->
 	<tx:advice id="txAdvice" transaction-manager="txManager">
@@ -26,12 +26,11 @@
 		</tx:attributes>
 	</tx:advice>
 	<!-- TransactionManager AOP 설정 -->
-<!-- 	<aop:config>
+<aop:config>
 		<aop:pointcut id="trPointcut"
 			expression="execution(* com.yedam..*Impl.*(..))" />
 		<aop:advisor pointcut-ref="trPointcut"
 			advice-ref="txAdvice" />
 	</aop:config>
- -->
 
 </beans>
